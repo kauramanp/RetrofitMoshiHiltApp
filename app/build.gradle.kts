@@ -60,6 +60,8 @@ dependencies {
 
 
     implementation(libs.retrofit)
+    implementation (libs.converter.moshi)
+    implementation (libs.adapter.rxjava2)
     implementation(libs.logging.interceptor)
     implementation (libs.okhttp)
 
