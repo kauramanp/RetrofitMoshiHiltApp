@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.aman.retrofitmoshihiltapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.aman.retrofitmoshihiltapp"
@@ -69,11 +69,11 @@ dependencies {
     ksp(libs.moshi.kotlin.codegen)
 
     // ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+//    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     // ViewModel utilities for Compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     // LiveData
-    implementation(libs.androidx.lifecycle.live.data.ktx)
+//    implementation(libs.androidx.lifecycle.live.data.ktx)
 
 }
 
