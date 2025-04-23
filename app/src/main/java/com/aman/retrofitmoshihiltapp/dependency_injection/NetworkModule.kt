@@ -24,7 +24,6 @@ object NetworkModule {
     @Provides
     fun provideBaseUrl(): String = Constants.BASE_URL
 
-
     @Singleton
     @Provides
     fun setupRetrofit(
