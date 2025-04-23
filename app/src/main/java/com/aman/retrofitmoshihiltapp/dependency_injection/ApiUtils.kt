@@ -1,25 +1,20 @@
 package com.aman.retrofitmoshihiltapp.dependency_injection
 
-import android.util.Log
 import androidx.annotation.Keep
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Response
-import okhttp3.ResponseBody
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
 class ApiUtils {
 }
 
+@Keep
 data class ApiResponse<T>(
     val data: T? = null,
     val message: String?,
     val status: Int,
     val success: Boolean,
 )
-
 
 @Keep
 class InvalidAuthorization: Exception()

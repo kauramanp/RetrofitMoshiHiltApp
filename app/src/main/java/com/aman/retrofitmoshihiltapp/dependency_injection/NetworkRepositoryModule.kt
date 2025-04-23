@@ -2,6 +2,7 @@ package com.aman.retrofitmoshihiltapp.dependency_injection
 
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -11,8 +12,8 @@ import javax.inject.Singleton
 abstract class NetworkRepositoryModule {
     @Singleton
     @Binds
-    abstract fun provideUserRepository(
-        userRepositoryImpl: NetworkApiRepositoryImpl
+    abstract fun provideNetworkRepository(
+        networkApiRepositoryImpl: NetworkApiRepositoryImpl
     ): NetworkApiRepository
 
 

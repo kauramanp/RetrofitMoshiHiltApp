@@ -100,7 +100,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    @AuthInterceptor
+    @TokenInterceptor
     fun providesAuthInterceptor(
         appUserPreferences: AppUserPreferences
     ) =
@@ -144,4 +144,9 @@ object NetworkModule {
 
         )
     }
+
+    @Singleton
+    @Provides
+    fun provideApiService(retrofit: Retrofit): ApiService =
+        retrofit.create(ApiService::class.java)
 }
