@@ -4,8 +4,6 @@ package com.aman.retrofitmoshihiltapp.models
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-class UserResponse : ArrayList<UserResponseItem>()
-
 @JsonClass(generateAdapter = true)
 data class UserResponseItem(
     @Json(name = "email")
