@@ -17,3 +17,4 @@ data class UserResponseItem(
     @Json(name = "status")
     val status: String? = ""
 )
+

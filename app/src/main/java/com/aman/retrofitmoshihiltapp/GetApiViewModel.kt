@@ -14,17 +14,16 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.launchIn
 
-@HiltViewModel
+//@HiltViewModel
 class GetApiViewModel @Inject constructor(
     private val repository: NetworkApiRepository
 ) : ViewModel() {
-    private val _uiStateUserResponse = MutableSharedFlow<UiState<UserResponseItem>>(replay = 1)
-    val uiStateUserResponse: SharedFlow<UiState<UserResponseItem>> = _uiStateUserResponse.asSharedFlow()
-
+    private val _uiStateUserResponse = MutableSharedFlow<UiState<List<UserResponseItem>>>()
+    val uiStateUserResponse: SharedFlow<UiState<List<UserResponseItem>>> = _uiStateUserResponse.asSharedFlow()
 
     fun fetchUserList() = repository.getApi("users",
-        null,
-        UserResponseItem::class.java)
+//        null,
+        /*UserResponseItem::class.java*/)
         .catch {
         _uiStateUserResponse.emit(
             UiState.Error(

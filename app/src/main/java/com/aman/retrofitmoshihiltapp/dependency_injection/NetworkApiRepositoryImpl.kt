@@ -9,15 +9,14 @@ class NetworkApiRepositoryImpl  @Inject constructor(
     private val apiService: ApiService
 ) : NetworkApiRepository {
 
-    override fun <T> getApi(
+    override fun getApi(
         endPoint: String,
-        queryParameters: HashMap<String, Any>?,
-        dataClass: Class<T>
-    )= flow {
+//        dataClass: Class<T>
+    ) = flow {
        emit(UiState.Loading)
        emit(
            handleApiCall {
-               apiService.hitGetApi(endPoint, queryParameters)
+               apiService.hitGetApi(/*endPoint,*/ )
            }
        )
    }.flowOn(Dispatchers.IO)

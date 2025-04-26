@@ -7,9 +7,6 @@ import javax.inject.Qualifier
 annotation class BaseUrl
 
 @Qualifier
-annotation class AuthInterceptor
-
-@Qualifier
 annotation class TokenInterceptor
 
 @Qualifier

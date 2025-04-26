@@ -3,6 +3,7 @@ package com.aman.retrofitmoshihiltapp.dependency_injection
 import android.os.Build
 import com.aman.retrofitmoshihiltapp.BuildConfig
 import com.aman.retrofitmoshihiltapp.utils.Constants
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,16 +25,26 @@ object NetworkModule {
     @Provides
     fun provideBaseUrl(): String = Constants.BASE_URL
 
+
     @Singleton
     @Provides
-    fun setupRetrofit(
+    fun provideConverterFactory(): MoshiConverterFactory =
+        MoshiConverterFactory.create(
+            Moshi.Builder()
+                .build()
+        )
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(
         @BaseUrl baseUrl: String,
         okHttpClient: OkHttpClient,
+        moshiConverterFactory: MoshiConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(moshiConverterFactory)
             .build()
     }
 
@@ -41,7 +52,7 @@ object NetworkModule {
     @Provides
     fun provideHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
-        @TokenInterceptor authInterceptor: Interceptor,
+        @TokenInterceptor tokenInterceptor: Interceptor,
         @LangInterceptor langInterceptor: Interceptor,
         @Named("DeviceInfoInterceptor") deviceInfoInterceptor: Interceptor
     ): OkHttpClient {
@@ -52,7 +63,7 @@ object NetworkModule {
                 writeTimeout(120, TimeUnit.SECONDS)
                 addInterceptor(deviceInfoInterceptor)
                 addInterceptor(langInterceptor)
-                addInterceptor(authInterceptor)
+                addInterceptor(tokenInterceptor)
                 addInterceptor(httpLoggingInterceptor)
             }
             .build()
@@ -91,7 +102,6 @@ object NetworkModule {
     }
 
     private fun Request.addLangToPostRequest(appUserPreferences: AppUserPreferences): Request {
-        val url = this.url
         return this.newBuilder().addHeader(
             "X-localization",
             "en"

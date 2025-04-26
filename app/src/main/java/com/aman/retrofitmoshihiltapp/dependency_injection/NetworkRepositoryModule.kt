@@ -15,7 +15,4 @@ abstract class NetworkRepositoryModule {
     abstract fun provideNetworkRepository(
         networkApiRepositoryImpl: NetworkApiRepositoryImpl
     ): NetworkApiRepository
-
-
-
 }

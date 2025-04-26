@@ -5,6 +5,7 @@ plugins {
     kotlin("kapt")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -69,8 +70,10 @@ dependencies {
     implementation(libs.moshi.kotlin)
     ksp(libs.moshi.kotlin.codegen)
 
-    // ViewModel
-//    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    //Lifecycle
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
     // ViewModel utilities for Compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     // LiveData

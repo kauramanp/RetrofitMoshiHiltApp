@@ -1,6 +1,9 @@
 package com.aman.retrofitmoshihiltapp.dependency_injection
 
 import androidx.annotation.Keep
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Response
 import retrofit2.HttpException
 import java.net.UnknownHostException
@@ -46,15 +49,14 @@ sealed class UiState<out T> {
 
 
 @Keep
-suspend fun <T> handleApiCall(apiCall: suspend () -> Response): UiState<T> {
+suspend fun <T> handleApiCall(/*dataClass: Class<T>,*/ apiCall: suspend () -> ApiResponse<T>): UiState<T> {
     return try {
         val apiResponse = apiCall()
 //        var doubleStatus = apiResponse.status is Double
-        when (apiResponse.code) {
+        when (apiResponse.status) {
            /* 200 -> {
                 val adapter: JsonAdapter<T> = Moshi.Builder().add(KotlinJsonAdapterFactory()).build().adapter(dataClass)
-
-                UiState.Success(apiResponse.body)
+               return UiState.Success(adapter.fromJson(apiResponse.body?.string() ?: ""))
             }*/
             401 -> UiState.Error(InvalidAuthorization(), apiResponse.message ?: "")
             else -> UiState.Error(InvalidAuthorization(), apiResponse.message ?: "")
